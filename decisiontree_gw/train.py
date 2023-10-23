@@ -1,3 +1,4 @@
+import numpy as np
 class DecisionTreeTrain:
     def __init__(self):
         """Class to train decision tree
@@ -75,4 +76,16 @@ class DecisionTreeTrain:
             data_size = len(data)
             entropy += -label_occurance/data_size * np.log2(label_occurance/data_size)
         return entropy
+
+def test_train():
+    """Test the class runs
+    """
+    training_data = np.loadtxt("..\cw1\wifi_db\clean_dataset.txt")
+    dt = DecisionTreeTrain()
+    tree, depth = dt.decision_tree_learning(training_data)
+    print(tree)
+    print(depth)
+
+if __name__ == "__main__":
+    test_train()
 
