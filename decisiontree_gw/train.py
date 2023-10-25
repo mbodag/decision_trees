@@ -13,18 +13,21 @@ class DecisionTreeTrain:
         Returns:
             decision_tree (dict): decision tree output in dictionary
         """
-
-        labels = np.unique(training_data[:,-1])
-        if len(labels) == 1:
-            return ({'attribute': None, 'value': np.floor(labels[0]), 'left': None, 'right': None, 'depth':depth}, depth)
-        else:
-            split_attribute, split = self.find_split(training_data)
-            left_data = training_data[training_data[:,split_attribute-1]<=split]
-            right_data = training_data[training_data[:,split_attribute-1]>split]
-            left_branch, left_depth = self.decision_tree_learning(left_data,depth+1)
-            right_branch, right_depth = self.decision_tree_learning(right_data, depth+1)
-            node = {'attribute': np.floor(split_attribute), 'value': split, 'left': left_branch, 'right': right_branch, 'depth':depth+1}
-        return (node, max(left_depth,right_depth))
+        try:
+            labels = np.unique(training_data[:,-1])
+            if len(labels) == 1:
+                return ({'attribute': None, 'value': np.floor(labels[0]), 'left': None, 'right': None, 'depth':depth, 'len': len(training_data)}, depth)
+            else:
+                split_attribute, split = self.find_split(training_data)
+                left_data = training_data[training_data[:,split_attribute-1]<=split]
+                right_data = training_data[training_data[:,split_attribute-1]>split]
+                left_branch, left_depth = self.decision_tree_learning(left_data,depth+1)
+                right_branch, right_depth = self.decision_tree_learning(right_data, depth+1)
+                node = {'attribute': np.floor(split_attribute), 'value': split, 'left': left_branch, 'right': right_branch, 'depth': depth+1, 'len': len(training_data)}
+            return (node, max(left_depth,right_depth))
+        except:
+            print("Error occured, check data input, returnning empty tree")
+            return {}
 
 
     def find_split(self, data):
