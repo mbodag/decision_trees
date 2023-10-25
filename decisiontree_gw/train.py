@@ -16,7 +16,7 @@ class DecisionTreeTrain:
         try:
             labels = np.unique(training_data[:,-1])
             if len(labels) == 1:
-                return ({'attribute': None, 'value': np.floor(labels[0]), 'left': None, 'right': None, 'depth':depth, 'len': len(training_data)}, depth)
+                return ({'attribute': None, 'value': np.floor(labels[0]), 'left': None, 'right': None, 'depth':depth, 'len': len(training_data)}, depth+1)
             else:
                 split_attribute, split = self.find_split(training_data)
                 left_data = training_data[training_data[:,split_attribute-1]<=split]
