@@ -1,12 +1,12 @@
 import numpy as np
-import train
+import decisiontree_gw.train as tr
 import copy
 
 class Prune:
     def __init__(self, training_data, validation_data):
         """Class to prune decision trees
         """
-        dt = train.DecisionTreeTrain()
+        dt = tr.DecisionTreeTrain()
         self.tree, self.tree_depth = dt.decision_tree_learning(training_data)
         self.training_data = training_data
         self.validation_data = validation_data
@@ -30,7 +30,7 @@ class Prune:
                     best_validation_error = best_validation_error
                     tree = pruned_tree
                 else:
-                    checked.add(list(item.values())[0])
+                    checked.add(list(list_to_prune[0].values())[0])
 
             classified_nodes, list_to_prune_update = self.get_list_to_prune(tree)
             list_to_prune = []
@@ -226,7 +226,7 @@ class Prune:
         return (branches_out, properties)
         
 def test_prune_optimum():
-    data = np.loadtxt("../wifi_db/clean_dataset.txt")
+    data = np.loadtxt("wifi_db/clean_dataset.txt")
     pr = Prune(data,data)
     it, pt = pr.get_optimum_pruned_tree()
     print(it)
@@ -234,5 +234,3 @@ def test_prune_optimum():
 
 if __name__ == "__main__":
     test_prune_optimum()
-
-

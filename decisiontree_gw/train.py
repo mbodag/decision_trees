@@ -83,7 +83,7 @@ class DecisionTreeTrain:
 def test_train():
     """Test the class runs
     """
-    training_data = np.loadtxt("..\cw1\wifi_db\clean_dataset.txt")
+    training_data = np.loadtxt("wifi_db/clean_dataset.txt")
     dt = DecisionTreeTrain()
     tree, depth = dt.decision_tree_learning(training_data)
     print(tree)
