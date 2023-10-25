@@ -14,7 +14,7 @@ def create_maths_string(dict_attribute_key, dict_value_key):
         string = '$' + dict_attribute_key[0] + '_' + dict_attribute_key[1] + ' < ' + str(dict_value_key) + '$'
         return string
     except:
-        string = '$X_' + str(dict_value_key) + '$'
+        string = '$L_' + str(dict_value_key) + '$'
     return string
 
 root_label = create_maths_string(decision_tree['attribute'], decision_tree['value'])
