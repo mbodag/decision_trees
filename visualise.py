@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 clean_data = np.loadtxt('wifi_db/clean_dataset.txt')
 decision_tree, depth = dt.decision_tree_learning(clean_data, 0)
 
-
 def plot_tree(node, x, y, parent, branch_text, depth=0, max_depth=4):
     if depth > max_depth:
         return
@@ -55,6 +54,16 @@ plt.axis('off')
 fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
 
 # More manual approach below
+
+# def create_maths_string(dict_attribute_key, dict_value_key):
+#     """ Make the node labels formatted in maths text """
+#     try:
+#         string = '$' + dict_attribute_key[0] + '_' + dict_attribute_key[1] + ' < ' + str(dict_value_key) + '$'
+#         return string
+#     except:
+#         string = '$L_' + str(dict_value_key) + '$'
+#     return string
+
 # # Level 1
 # root_label = create_maths_string(decision_tree['attribute'], decision_tree['value'])
 
@@ -79,6 +88,7 @@ fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
 # rll_label = create_maths_string(decision_tree['right']['left']['left']['attribute'], decision_tree['right']['left']['left']['value'])
 
 
+<<<<<<< HEAD
 # fig = plt.figure()
 # ax = fig.add_subplot()
 # ax.axis([0, 100, 0, 100])
@@ -129,3 +139,6 @@ fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
 
 
 # #fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
+=======
+fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
+>>>>>>> eb5344469c676e5749632c7576333b3374891e21
