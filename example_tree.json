@@ -3,118 +3,75 @@
     "value": -54.5,
     "left": {
         "attribute": "X4",
-        "value": -58.5,
+        "value": -61.5,
         "left": {
-            "attribute": "X3",
-            "value": -56.5,
+            "attribute": "X2",
+            "value": -54.5,
             "left": {
-                "attribute": "X2",
-                "value": -55.5,
+                "attribute": null,
+                "value": 1,
+                "left": null,
+                "right": null,
+                "depth": 3
+            },
+            "right": {
+                "attribute": "X0",
+                "value": -60.5,
                 "left": {
                     "attribute": null,
                     "value": 1,
                     "left": null,
-                    "right": null
+                    "right": null,
+                    "depth": 4
                 },
                 "right": {
-                    "attribute": "X0",
-                    "value": -56.5,
-                    "left": {
-                        "attribute": "X6",
-                        "value": -87.5,
-                        "left": {
-                            "attribute": "X1",
-                            "value": -55.5,
-                            "left": {
-                                "attribute": null,
-                                "value": 1,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "attribute": "X0",
-                                "value": -63.0,
-                                "left": {
-                                    "attribute": null,
-                                    "value": 1,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "attribute": null,
-                                    "value": 4,
-                                    "left": null,
-                                    "right": null
-                                }
-                            }
-                        },
-                        "right": {
-                            "attribute": null,
-                            "value": 1,
-                            "left": null,
-                            "right": null
-                        }
-                    },
-                    "right": {
-                        "attribute": "X1",
-                        "value": -53.5,
-                        "left": {
-                            "attribute": null,
-                            "value": 4,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "attribute": null,
-                            "value": 3,
-                            "left": null,
-                            "right": null
-                        }
-                    }
-                }
-            },
-            "right": {
-                "attribute": "X3",
-                "value": -55.5,
-                "left": {
                     "attribute": "X2",
-                    "value": -53.5,
+                    "value": -52.5,
                     "left": {
                         "attribute": null,
-                        "value": 1,
+                        "value": 4,
                         "left": null,
-                        "right": null
+                        "right": null,
+                        "depth": 5
                     },
                     "right": {
-                        "attribute": "X0",
-                        "value": -60.5,
-                        "left": {
-                            "attribute": null,
-                            "value": 3,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "attribute": null,
-                            "value": 4,
-                            "left": null,
-                            "right": null
-                        }
+                        "attribute": null,
+                        "value": 3,
+                        "left": null,
+                        "right": null,
+                        "depth": 5
                     }
+                }
+            }
+        },
+        "right": {
+            "attribute": "X4",
+            "value": -56.0,
+            "left": {
+                "attribute": "X0",
+                "value": -60.5,
+                "left": {
+                    "attribute": null,
+                    "value": 4,
+                    "left": null,
+                    "right": null,
+                    "depth": 4
                 },
                 "right": {
                     "attribute": null,
                     "value": 3,
                     "left": null,
-                    "right": null
+                    "right": null,
+                    "depth": 4
                 }
+            },
+            "right": {
+                "attribute": null,
+                "value": 4,
+                "left": null,
+                "right": null,
+                "depth": 3
             }
-        },
-        "right": {
-            "attribute": null,
-            "value": 4,
-            "left": null,
-            "right": null
         }
     },
     "right": {
@@ -122,227 +79,74 @@
         "value": -44.5,
         "left": {
             "attribute": "X4",
-            "value": -70.5,
+            "value": -68.5,
             "left": {
-                "attribute": "X3",
-                "value": -48.5,
+                "attribute": "X0",
+                "value": -51.5,
                 "left": {
-                    "attribute": "X2",
-                    "value": -58.0,
+                    "attribute": null,
+                    "value": 3,
+                    "left": null,
+                    "right": null,
+                    "depth": 4
+                },
+                "right": {
+                    "attribute": "X1",
+                    "value": -58.5,
                     "left": {
                         "attribute": "X0",
-                        "value": -50.5,
+                        "value": -48.5,
                         "left": {
                             "attribute": null,
                             "value": 3,
                             "left": null,
-                            "right": null
+                            "right": null,
+                            "depth": 6
                         },
                         "right": {
                             "attribute": null,
                             "value": 2,
                             "left": null,
-                            "right": null
+                            "right": null,
+                            "depth": 6
                         }
                     },
                     "right": {
-                        "attribute": null,
-                        "value": 3,
-                        "left": null,
-                        "right": null
-                    }
-                },
-                "right": {
-                    "attribute": "X2",
-                    "value": -53.5,
-                    "left": {
                         "attribute": null,
                         "value": 2,
                         "left": null,
-                        "right": null
-                    },
-                    "right": {
-                        "attribute": "X0",
-                        "value": -47.0,
-                        "left": {
-                            "attribute": null,
-                            "value": 3,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "attribute": null,
-                            "value": 2,
-                            "left": null,
-                            "right": null
-                        }
+                        "right": null,
+                        "depth": 5
                     }
                 }
             },
             "right": {
-                "attribute": "X3",
-                "value": -39.5,
+                "attribute": "X6",
+                "value": -73.5,
                 "left": {
-                    "attribute": "X2",
-                    "value": -53.5,
-                    "left": {
-                        "attribute": "X5",
-                        "value": -77.5,
-                        "left": {
-                            "attribute": "X5",
-                            "value": -85.5,
-                            "left": {
-                                "attribute": "X6",
-                                "value": -77.5,
-                                "left": {
-                                    "attribute": "X3",
-                                    "value": -47.0,
-                                    "left": {
-                                        "attribute": null,
-                                        "value": 3,
-                                        "left": null,
-                                        "right": null
-                                    },
-                                    "right": {
-                                        "attribute": "X1",
-                                        "value": -54.5,
-                                        "left": {
-                                            "attribute": null,
-                                            "value": 2,
-                                            "left": null,
-                                            "right": null
-                                        },
-                                        "right": {
-                                            "attribute": null,
-                                            "value": 3,
-                                            "left": null,
-                                            "right": null
-                                        }
-                                    }
-                                },
-                                "right": {
-                                    "attribute": null,
-                                    "value": 2,
-                                    "left": null,
-                                    "right": null
-                                }
-                            },
-                            "right": {
-                                "attribute": "X3",
-                                "value": -45.5,
-                                "left": {
-                                    "attribute": null,
-                                    "value": 3,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "attribute": "X0",
-                                    "value": -48.0,
-                                    "left": {
-                                        "attribute": null,
-                                        "value": 3,
-                                        "left": null,
-                                        "right": null
-                                    },
-                                    "right": {
-                                        "attribute": "X2",
-                                        "value": -55.5,
-                                        "left": {
-                                            "attribute": null,
-                                            "value": 3,
-                                            "left": null,
-                                            "right": null
-                                        },
-                                        "right": {
-                                            "attribute": null,
-                                            "value": 2,
-                                            "left": null,
-                                            "right": null
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "right": {
-                            "attribute": "X4",
-                            "value": -68.0,
-                            "left": {
-                                "attribute": null,
-                                "value": 2,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "attribute": "X0",
-                                "value": -49.5,
-                                "left": {
-                                    "attribute": null,
-                                    "value": 3,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "attribute": "X4",
-                                    "value": -65.0,
-                                    "left": {
-                                        "attribute": null,
-                                        "value": 2,
-                                        "left": null,
-                                        "right": null
-                                    },
-                                    "right": {
-                                        "attribute": "X6",
-                                        "value": -75.0,
-                                        "left": {
-                                            "attribute": null,
-                                            "value": 3,
-                                            "left": null,
-                                            "right": null
-                                        },
-                                        "right": {
-                                            "attribute": null,
-                                            "value": 2,
-                                            "left": null,
-                                            "right": null
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "right": {
-                        "attribute": "X3",
-                        "value": -59.5,
-                        "left": {
-                            "attribute": null,
-                            "value": 4,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "attribute": "X6",
-                            "value": -72.0,
-                            "left": {
-                                "attribute": null,
-                                "value": 3,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "attribute": null,
-                                "value": 2,
-                                "left": null,
-                                "right": null
-                            }
-                        }
-                    }
+                    "attribute": null,
+                    "value": 3,
+                    "left": null,
+                    "right": null,
+                    "depth": 4
                 },
                 "right": {
-                    "attribute": null,
-                    "value": 2,
-                    "left": null,
-                    "right": null
+                    "attribute": "X0",
+                    "value": -47.0,
+                    "left": {
+                        "attribute": null,
+                        "value": 3,
+                        "left": null,
+                        "right": null,
+                        "depth": 5
+                    },
+                    "right": {
+                        "attribute": null,
+                        "value": 2,
+                        "left": null,
+                        "right": null,
+                        "depth": 5
+                    }
                 }
             }
         },
@@ -351,35 +155,28 @@
             "value": -47.5,
             "left": {
                 "attribute": "X0",
-                "value": -42.5,
+                "value": -41.5,
                 "left": {
                     "attribute": null,
                     "value": 3,
                     "left": null,
-                    "right": null
+                    "right": null,
+                    "depth": 4
                 },
                 "right": {
-                    "attribute": "X2",
-                    "value": -48.5,
-                    "left": {
-                        "attribute": null,
-                        "value": 2,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": {
-                        "attribute": null,
-                        "value": 3,
-                        "left": null,
-                        "right": null
-                    }
+                    "attribute": null,
+                    "value": 2,
+                    "left": null,
+                    "right": null,
+                    "depth": 4
                 }
             },
             "right": {
                 "attribute": null,
                 "value": 2,
                 "left": null,
-                "right": null
+                "right": null,
+                "depth": 3
             }
         }
     }

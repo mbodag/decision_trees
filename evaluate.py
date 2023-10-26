@@ -1,7 +1,7 @@
 import numpy as np
 import json
 
-def split_dataset_with_validation(dataset, test_ratio, validation_ratio = 0.0):
+def split_dataset_with_validation(dataset, test_ratio, validation_ratio):
     """Create a decision tree of given depth from the input dataset
 
     Extended description of function.
@@ -35,8 +35,6 @@ def split_dataset_with_validation(dataset, test_ratio, validation_ratio = 0.0):
 
 def split_dataset(dataset, test_ratio):
     """Create a decision tree of given depth from the input dataset
-
-    Extended description of function.
 
     Args:
         dataset (numpy.ndarray): The dataset to be split
@@ -80,9 +78,9 @@ def predict_instance(x_instance, decision_tree):
     else:
         attribute = int(decision_tree['attribute'][1])
         value = decision_tree['value']
-        if x_instance[attribute] < value:
+        if x_instance[attribute] <= value:
                 return predict_instance(x_instance, decision_tree['left'])
-        elif x_instance[attribute] >= value: #NOTE IF the instance value is equal to the decision tree value then we take the node on the right arbitrarily
+        elif x_instance[attribute] > value: #NOTE IF the instance value is equal to the decision tree value then we take the node on the right arbitrarily
                 return predict_instance(x_instance, decision_tree['right'])
         else:
             print('This issue is unaccounted for')
@@ -147,12 +145,24 @@ def print_metrics(confusion_matrix):
     print("Recall: "+ str(recall(confusion_matrix)))
     print("Macro averaged precision: "+ str(macro_avg_precision(confusion_matrix)))
     print("Macro averaged recall: "+ str(macro_avg_recall(confusion_matrix)))
+    print("F1-score: "+str(f_score(confusion_matrix)))
+    print("Macro averaged F1-score: "+str(macro_averaged_f_score(confusion_matrix)))
 
-#TODO write this function
-def f_score(confusion_matrix, beta):
+def validation_error():
     pass
+
+def f_score(confusion_matrix, beta = 1):
+    rcl = recall(confusion_matrix)
+    pre = precision(confusion_matrix)
+    numerator = (1+beta**2)* (pre*rcl)
+    denominator = ((beta**2) * pre) + rcl
+    f_score = numerator / denominator
+    return f_score
+
+def macro_averaged_f_score(confusion_matrix, beta = 1):
+    return np.average(f_score(confusion_matrix, beta = beta))
 
 def evaluate(test_db, trained_tree):
-    pass
-
+    conf_matrix = confusion_matrix(test_db[:,:-1], test_db[:,-1], trained_tree)
+    return accuracy(conf_matrix)
     

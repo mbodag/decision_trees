@@ -1,6 +1,4 @@
 import numpy as np
-import json
-import evaluate
 
 
 def calculate_entropy(dataset):
@@ -30,6 +28,7 @@ def find_split(dataset):
                 min_entropy = sum_entropy
                 optimal_value = (dataset[cut-1,attribute] + dataset[cut, attribute])/2 
                 optimal_attribute = attribute
+    #print(dataset, optimal_value, optimal_attribute)
     return optimal_attribute, optimal_value
 
 
@@ -48,13 +47,17 @@ def decision_tree_learning(dataset: np.array, depth: int):
         depth (int)
 
     """
-    # node = {'attribute': None, 'value': None, 'left': None, 'right': None}
     if len(np.unique(dataset[:,-1])) == 1:
-        return({'attribute' : None , 'value' : int(dataset[0,-1]), 'left': None, 'right': None}, depth) #Edge case?
+        return({'attribute' : None ,
+                'value' : int(dataset[0,-1]), 
+                'left': None, 
+                'right': None,
+                'depth': depth,}, depth) #Edge case?
     else:
         attribute_index, value = find_split(dataset)
         left_dataset = dataset[dataset[:,attribute_index] < value]
-        right_dataset = dataset[dataset[:, attribute_index] > value] #Might need a >=
+        right_dataset = dataset[dataset[:, attribute_index] > value]
+        #print(len(left_dataset)+len(right_dataset) == len(dataset), len(left_dataset), len(right_dataset)) #Might need a >=
         left_branch, left_depth = decision_tree_learning(left_dataset, depth+1)
         right_branch, right_depth = decision_tree_learning(right_dataset, depth+1)
         node = {'attribute': 'X'+str(attribute_index), 'value': value, 'left': left_branch, 'right': right_branch}
