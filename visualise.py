@@ -13,45 +13,153 @@ def plot_tree(node, x, y, parent, branch_text, depth=0, max_depth=4):
         text = '$' + node['attribute'][0] + '_' + node['attribute'][1] + ' < ' + str(node['value']) + '$'
     else:
         text = '$X_' + str(node['value']) + '$'
-        plt.scatter(x, y, marker='o', color='green', s=150, alpha = 0.5)
+        plt.scatter(x, y, marker='o', color='green', s=200, alpha = 0.5)
     
     # Adjust the spacing between the arrows
     spacing = 2
     
     # Plot the node
     if node['attribute'] is not None:
-            plt.annotate(text, xy=(parent[0], parent[1]-0.3), xytext=(x, y),
-                         arrowprops=dict(arrowstyle="<-", connectionstyle="arc3", color='black', shrinkA=5, shrinkB=5),
-                         bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="black", lw=1),
-                         horizontalalignment='center', verticalalignment='center', fontsize=8)
+            plt.annotate(text, 
+                          xy=(parent[0], 
+                              parent[1]-0.1), 
+                          xytext=(x, y),
+                          arrowprops=dict(arrowstyle="<-", 
+                                          connectionstyle="arc3", 
+                                          color='black', 
+                                          shrinkA=5, 
+                                          shrinkB=5),
+                          bbox=dict(boxstyle="round,pad=0.3",
+                                    fc="white",
+                                    ec="black",
+                                    lw=1),
+                          horizontalalignment='center', 
+                          verticalalignment='center', 
+                          fontsize=8)
     else:
-        plt.annotate(text, xy=(parent[0], parent[1]-0.3), xytext=(x, y),
-                     arrowprops=dict(arrowstyle="<-", connectionstyle="arc3", color='black', shrinkA=5, shrinkB=5),
-                     horizontalalignment='center', verticalalignment='center', fontsize=8)
+        plt.annotate(text, 
+                      xy=(parent[0],
+                          parent[1]-0.1),
+                      xytext=(x, y),
+                      arrowprops=dict(arrowstyle="<-",
+                                      connectionstyle="arc3",
+                                      color='black',
+                                      shrinkA=5,
+                                      shrinkB=5),
+                      horizontalalignment='center',
+                      verticalalignment='center',
+                      fontsize=8)
 
     
     # Plot left and right branches
     if node['left'] is not None:
-        plot_tree(node['left'], x - spacing * 2 ** (max_depth - depth - 1), y - 1, (x, y), 'L', depth + 1)
+        plot_tree(node['left'],
+                  x - spacing * 2 ** (max_depth - depth - 1),
+                  y - 1,
+                  (x, y),
+                  'L',
+                  depth + 1)
     if node['right'] is not None:
-        plot_tree(node['right'], x + spacing * 2 ** (max_depth - depth - 1), y - 1, (x, y), 'R', depth + 1)
-
-# Define the maximum depth of the tree for normalization
-max_depth = 4
+        plot_tree(node['right'],
+                  x + spacing * 2 ** (max_depth - depth - 1),
+                  y - 1,
+                  (x, y),
+                  'R',
+                  depth + 1)
 
 # Initialize the plot
-fig = plt.figure(figsize=(12, 12))
+fig = plt.figure(figsize=(12, 6))
 
-# Starting point for the root node
+#Starting point for the root node
 plot_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
 
-# Adjusting plot limits
-plt.ylim(-20, 5)
-plt.xlim(-20, 25)
+#Adjusting plot limits
+plt.ylim(-4, 0)
+plt.xlim(-12, 15)
 plt.axis('off')
 
+fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 600)
 
-fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
+
+# Now plot the full tree
+def plot_full_tree(node, x, y, parent, branch_text, depth=0, max_depth=16):
+    if depth > max_depth:
+        return
+    
+    if node['attribute'] is not None:
+        text = '$' + node['attribute'][0] + '_' + node['attribute'][1] + ' < ' + str(node['value']) + '$'
+    else:
+        text = '$X_' + str(node['value']) + '$'
+        plt.scatter(x, y, marker='o', color='green', s=200, alpha = 0.5)
+    
+    # Adjust the spacing between the arrows
+    spacing = 2
+    
+    # Plot the node
+    if node['attribute'] is not None:
+            plt.annotate(text, 
+                         xy=(parent[0], 
+                             parent[1]-0.1), 
+                         xytext=(x, y),
+                         arrowprops=dict(arrowstyle="<-", 
+                                         connectionstyle="arc3", 
+                                         color='black', 
+                                         shrinkA=5, 
+                                         shrinkB=5),
+                         bbox=dict(boxstyle="round,pad=0.3",
+                                   fc="white",
+                                   ec="black",
+                                   lw=1),
+                         horizontalalignment='center', 
+                         verticalalignment='center', 
+                         fontsize=8)
+    else:
+        plt.annotate(text, 
+                     xy=(parent[0],
+                         parent[1]-0.1),
+                     xytext=(x, y),
+                     arrowprops=dict(arrowstyle="<-",
+                                     connectionstyle="arc3",
+                                     color='black',
+                                     shrinkA=5,
+                                     shrinkB=5),
+                     horizontalalignment='center',
+                     verticalalignment='center',
+                     fontsize=8)
+
+    
+    # Plot left and right branches
+    if node['left'] is not None:
+        plot_full_tree(node['left'],
+                  x - spacing * 2 ** (max_depth - depth - 1),
+                  y - 1,
+                  (x, y),
+                  'L',
+                  depth + 1)
+    if node['right'] is not None:
+        plot_full_tree(node['right'],
+                  x + spacing * 2 ** (max_depth - depth - 1),
+                  y - 1,
+                  (x, y),
+                  'R',
+                  depth + 1)
+
+# Adjust the figure size and use subplots
+fig = plt.figure(figsize=(12, 6))
+
+# Call the plot_tree function
+plot_full_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
+
+plt.ylim(-15, 1)
+plt.xlim(-65000,65000)
+plt.axis('off')
+
+fig.savefig('decision_tree_full_graph.svg', format = 'svg', dpi = 600)
+
+
+
+
+
 
 # More manual approach below
 
@@ -88,7 +196,6 @@ fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
 # rll_label = create_maths_string(decision_tree['right']['left']['left']['attribute'], decision_tree['right']['left']['left']['value'])
 
 
-<<<<<<< HEAD
 # fig = plt.figure()
 # ax = fig.add_subplot()
 # ax.axis([0, 100, 0, 100])
@@ -139,6 +246,4 @@ fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
 
 
 # #fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
-=======
-fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
->>>>>>> eb5344469c676e5749632c7576333b3374891e21
+#fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 1200)
