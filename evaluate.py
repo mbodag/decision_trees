@@ -33,7 +33,7 @@ def split_dataset_with_validation(dataset, test_ratio, validation_ratio):
     
     return training_data, test_data, validation_data
 
-def split_dataset(dataset, test_ratio):
+def split_dataset(dataset, test_ratio, rng = np.random.default_rng(1)):
     """Create a decision tree of given depth from the input dataset
 
     Args:
@@ -49,7 +49,7 @@ def split_dataset(dataset, test_ratio):
     """
     if test_ratio > 1:
         raise ValueError('Invalid ratio')
-    np.random.shuffle(dataset)
+    rng.shuffle(dataset)
     num_data_points = np.size(dataset, axis = 0)
     num_test_points = round(num_data_points * test_ratio)
     test_data = dataset[:num_test_points]

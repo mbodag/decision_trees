@@ -2,9 +2,10 @@ from algorithm_matis import decision_tree_learning
 import evaluate
 import numpy as np
 import json
-
+from numpy.random import default_rng
 #TODO Clean up this file
 def main():
+    seed = default_rng(444233429)
     #Load data
     clean_data = np.loadtxt('wifi_db/clean_dataset.txt')
     noisy_data = np.loadtxt('wifi_db/noisy_dataset.txt')
@@ -12,7 +13,7 @@ def main():
     #Split the dataset
     evaluation_vector = np.zeros(10)
     for i in range(10):
-        train_data, test_data = evaluate.split_dataset(clean_data, 0.1)
+        train_data, test_data = evaluate.split_dataset(clean_data, 0.1, seed)
 
         #First cross-validation evaluation bit
         decision_tree, depth = decision_tree_learning(train_data, 0)
@@ -20,7 +21,7 @@ def main():
         
         for j in range(10):
             #Pruning cross-validation bit
-            cross_train_data, validation_data = evaluate.split_dataset(train_data, 0.99) #
+            cross_train_data, validation_data = evaluate.split_dataset(train_data, 0.9, seed) #
             #I realised I split the train_data and put the training bit back into train_data which exponentially decreased the amount of training data on every loop. 
             #Took me an hour to figure out what was wrong, I thought it was my decision tree algorithm. 
             #Therefore I'm renaming the variable to cross_train_data, but feel free to change it
