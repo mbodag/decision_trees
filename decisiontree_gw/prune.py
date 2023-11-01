@@ -1,6 +1,7 @@
 import numpy as np
 import decisiontree_gw.train as tr
 import copy
+import evaluate
 
 class Prune:
     def __init__(self, training_data, validation_data):
@@ -18,7 +19,7 @@ class Prune:
             pruned_tree (dict):
         """
         initial_tree = copy.deepcopy(self.tree)
-        best_validation_error = np.inf
+        best_accuracy = -np.inf
         tree = self.tree
         classified_nodes, list_to_prune = self.get_list_to_prune(tree)
         checked = set() # list of nodes that are checked but not pruned
@@ -26,8 +27,8 @@ class Prune:
         while list_to_prune:
             if list(list_to_prune[0].values())[0] not in checked:
                 pruned_tree = self.prune_next(tree, classified_nodes, list_to_prune[0])
-                if best_validation_error <= best_validation_error: # to be replaced with validation error logic -> chat with Matis
-                    best_validation_error = best_validation_error
+                if best_accuracy <= evaluate.evaluate(self.validation_data, pruned_tree): # to be replaced with validation error logic -> chat with Matis
+                    best_accuracy = evaluate.evaluate(self.validation_data, pruned_tree)
                     tree = pruned_tree
                 else:
                     checked.add(list(list_to_prune[0].values())[0])

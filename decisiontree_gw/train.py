@@ -23,7 +23,7 @@ class DecisionTreeTrain:
                 right_data = training_data[training_data[:,split_attribute-1]>split]
                 left_branch, left_depth = self.decision_tree_learning(left_data,depth+1)
                 right_branch, right_depth = self.decision_tree_learning(right_data, depth+1)
-                node = {'attribute': np.floor(split_attribute), 'value': split, 'left': left_branch, 'right': right_branch, 'depth': depth+1, 'len': len(training_data)}
+                node = {'attribute': 'X'+str(np.floor(split_attribute)), 'value': split, 'left': left_branch, 'right': right_branch, 'depth': depth+1, 'len': len(training_data)}
             return (node, max(left_depth,right_depth))
         except:
             print("Error occured, check data input, returnning empty tree")
