@@ -14,11 +14,8 @@ def main(seed):
     eval_cross_validation(clean_data, seed)
     eval_cross_validation(noisy_data, seed)
 
-    pruned_tree_clean = pruning_tests(clean_data, seed)
-    pruned_tree_noisy = pruning_tests(noisy_data, seed)
-
-    eval_cross_validation(pruned_tree_clean, seed)
-    eval_cross_validation(pruned_tree_noisy, seed)
+    pruning_tests(clean_data, seed)
+    pruning_tests(noisy_data, seed)
 
 def eval_cross_validation(data, seed): 
     
@@ -37,13 +34,17 @@ def eval_cross_validation(data, seed):
     average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 10
     print(average_confusion_matrix, average_eval)
+    evaluate.print_metrics(average_confusion_matrix)
     #file = open('example_tree.json','w')
     #json.dump(decision_tree, file, indent = 4)
 
 
 def pruning_tests(data, seed):
-    accuracy = -np.inf
+    evaluation_vector = np.zeros(10)
+    confusion_matrix = np.zeros((4,4))
+    
     for i in range(10):
+        accuracy = -np.inf
         #Split the dataset
         train_data, test_data = evaluate.split_dataset(data, 0.1, seed)
         
@@ -52,12 +53,22 @@ def pruning_tests(data, seed):
             cross_train_data, validation_data = evaluate.split_dataset(train_data, 0.1, seed)
             prune = pr.Prune(cross_train_data, validation_data)
             initial_tree, pruned_tree = prune.get_optimum_pruned_tree()
-            if evaluate.evaluate(pruned_tree) >= accuracy:
-                accuracy = evaluate.evaluate(pruned_tree)
+            if evaluate.evaluate(validation_data,pruned_tree) >= accuracy:
+                accuracy = evaluate.evaluate(validation_data,pruned_tree)
+                output_tree = pruned_tree
             else:
                 pass
+        
+        evaluation_vector[i] = evaluate.evaluate(test_data, output_tree)
+        confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], output_tree)
     
-    return pruned_tree
+    #For the evaluation section
+    average_eval = np.average(evaluation_vector)
+    average_confusion_matrix = confusion_matrix / 10
+    print(average_confusion_matrix, average_eval)
+    evaluate.print_metrics(average_confusion_matrix)
+        
+    return output_tree
 
 if __name__ == '__main__':
     seed = default_rng(444233429)

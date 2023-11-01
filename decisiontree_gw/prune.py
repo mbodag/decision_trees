@@ -2,13 +2,15 @@ import numpy as np
 import decisiontree_gw.train as tr
 import copy
 import evaluate
+from algorithm_matis import decision_tree_learning
 
 class Prune:
     def __init__(self, training_data, validation_data):
         """Class to prune decision trees
         """
-        dt = tr.DecisionTreeTrain()
-        self.tree, self.tree_depth = dt.decision_tree_learning(training_data)
+        # dt = tr.DecisionTreeTrain()
+        # self.tree, self.tree_depth = dt.decision_tree_learning(training_data)
+        self.tree, self.tree_depth = decision_tree_learning(training_data,0)
         self.training_data = training_data
         self.validation_data = validation_data
 
@@ -19,8 +21,8 @@ class Prune:
             pruned_tree (dict):
         """
         initial_tree = copy.deepcopy(self.tree)
-        best_accuracy = -np.inf
         tree = self.tree
+        best_accuracy = evaluate.evaluate(self.validation_data, initial_tree)
         classified_nodes, list_to_prune = self.get_list_to_prune(tree)
         checked = set() # list of nodes that are checked but not pruned
 

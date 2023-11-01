@@ -13,21 +13,21 @@ class DecisionTreeTrain:
         Returns:
             decision_tree (dict): decision tree output in dictionary
         """
-        try:
-            labels = np.unique(training_data[:,-1])
-            if len(labels) == 1:
-                return ({'attribute': None, 'value': np.floor(labels[0]), 'left': None, 'right': None, 'depth':depth, 'len': len(training_data)}, depth+1)
-            else:
-                split_attribute, split = self.find_split(training_data)
-                left_data = training_data[training_data[:,split_attribute-1]<=split]
-                right_data = training_data[training_data[:,split_attribute-1]>split]
-                left_branch, left_depth = self.decision_tree_learning(left_data,depth+1)
-                right_branch, right_depth = self.decision_tree_learning(right_data, depth+1)
-                node = {'attribute': 'X'+str(np.floor(split_attribute)), 'value': split, 'left': left_branch, 'right': right_branch, 'depth': depth+1, 'len': len(training_data)}
-            return (node, max(left_depth,right_depth))
-        except:
-            print("Error occured, check data input, returnning empty tree")
-            return {}
+        #try:
+        labels = np.unique(training_data[:,-1])
+        if len(labels) == 1:
+            return ({'attribute': None, 'value': int(np.floor(labels[0])), 'left': None, 'right': None, 'depth':depth, 'len': len(training_data)}, depth+1)
+        else:
+            split_attribute, split = self.find_split(training_data)
+            left_data = training_data[training_data[:,split_attribute-1]<=split]
+            right_data = training_data[training_data[:,split_attribute-1]>split]
+            left_branch, left_depth = self.decision_tree_learning(left_data,depth+1)
+            right_branch, right_depth = self.decision_tree_learning(right_data, depth+1)
+            node = {'attribute': 'X'+str(int(np.floor(split_attribute))), 'value': split, 'left': left_branch, 'right': right_branch, 'depth': depth+1, 'len': len(training_data)}
+        return (node, max(left_depth,right_depth))
+        #except:
+        #print("Error occured, check data input, returnning empty tree")
+        return {}
 
 
     def find_split(self, data):
@@ -47,7 +47,7 @@ class DecisionTreeTrain:
         best_attribute = None
         best_split_value = None
 
-        for attribute in range(1,attributes+1):
+        for attribute in range(1,attributes):
             potential_splits = np.sort(data[:,attribute-1])
             for split in np.unique(potential_splits):
                 left = data[data[:,attribute-1]<=split]
@@ -83,7 +83,7 @@ class DecisionTreeTrain:
 def test_train():
     """Test the class runs
     """
-    training_data = np.loadtxt("wifi_db/clean_dataset.txt")
+    training_data = np.loadtxt("wifi_db/noisy_dataset.txt")
     dt = DecisionTreeTrain()
     tree, depth = dt.decision_tree_learning(training_data)
     print(tree)

@@ -52,7 +52,7 @@ def decision_tree_learning(dataset: np.array, depth: int):
                 'value' : int(dataset[0,-1]), 
                 'left': None, 
                 'right': None,
-                'depth': depth,}, depth) #Edge case?
+                'depth': depth,'len':len(dataset)}, depth) #Edge case?
     else:
         attribute_index, value = find_split(dataset)
         left_dataset = dataset[dataset[:,attribute_index] < value]
@@ -60,5 +60,5 @@ def decision_tree_learning(dataset: np.array, depth: int):
         #print(len(left_dataset)+len(right_dataset) == len(dataset), len(left_dataset), len(right_dataset)) #Might need a >=
         left_branch, left_depth = decision_tree_learning(left_dataset, depth+1)
         right_branch, right_depth = decision_tree_learning(right_dataset, depth+1)
-        node = {'attribute': 'X'+str(attribute_index), 'value': value, 'left': left_branch, 'right': right_branch}
+        node = {'attribute': 'X'+str(attribute_index), 'value': value, 'left': left_branch, 'right': right_branch, 'depth':depth, 'len':len(dataset)}
         return(node, max(left_depth, right_depth))
