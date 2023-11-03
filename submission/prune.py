@@ -39,8 +39,8 @@ class Prune:
                     list_to_prune.append(node)
                 else:
                     pass
-        
-        return (initial_tree,tree)
+        pruned_depth = self.find_max_depth(tree)
+        return (initial_tree,self.tree_depth,tree,pruned_depth)
 
     def prune_next(self, initial_tree, classified_nodes, node_to_prune):
         """Method to prune and return updated tree:
@@ -224,6 +224,22 @@ class Prune:
             branches_out.append({str(id):branch})
         
         return (branches_out, properties)
+    
+    def find_max_depth(self,tree):
+        """Method to get the maximum depth of a tree
+
+        Args:
+            tree (dict): dictionary representing part of decision tree
+
+        Returns:
+            max_depth (int): maximum depth of tree
+        """
+        if isinstance(tree,dict):
+            current_value = tree.get("depth", float('-inf'))
+            children_values = [self.find_max_depth(child) for child in [tree["left"],tree["right"]]]
+            return max([current_value]+children_values)
+        else:
+            return float('-inf')
         
 def test_prune_optimum():
     data = np.loadtxt("wifi_db/clean_dataset.txt")

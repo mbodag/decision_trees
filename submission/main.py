@@ -18,12 +18,20 @@ def main(seed):
     noisy_data = np.loadtxt('wifi_db/noisy_dataset.txt')
 
     # 10 fold cross validation of unpruned tree on clean and noisy data
+    print("Output for decision tree training algorithm without pruning - Clean data")
     eval_cross_validation(clean_data, seed)
+    print("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-")
+    print("Output for decision tree training algorithm without pruning - Noisy data")
     eval_cross_validation(noisy_data, seed)
+    print("=========================================================================")
 
     # Nested 10 fold cross validation of pruned tree
+    print("Output for decision tree training algorithm with pruning - Clean data")
     pruning_tests(clean_data, seed)
+    print("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-")
+    print("Output for decision tree training algorithm with pruning - Noisy data")
     pruning_tests(noisy_data, seed)
+    print("=========================================================================")
     return None
 
 def eval_cross_validation(data, seed): 
@@ -50,7 +58,7 @@ def eval_cross_validation(data, seed):
     #For the evaluation section
     average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 10
-    print(average_confusion_matrix, average_eval)
+    print("Average confusion matrix: \n", average_confusion_matrix, "\nAverage accuracy: ", average_eval)
     evaluate.print_metrics(average_confusion_matrix)
     #file = open('example_tree.json','w')
     #json.dump(decision_tree, file, indent = 4)
@@ -69,37 +77,42 @@ def pruning_tests(data, seed):
     """
     evaluation_vector = np.zeros(10)
     confusion_matrix = np.zeros((4,4))
+    all_unpruned_depth = []
+    all_pruned_depth = []
     
     for i in range(10):
         accuracy = -np.inf
         #Split the dataset
         train_data, test_data = evaluate.split_dataset(data, 0.1, seed)
-        
+        each_pruned_depth = []
+        each_unpruned_depth = []
         for j in range(9):
             #Pruning cross-validation bit
             cross_train_data, validation_data = evaluate.split_dataset(train_data, 1/9, seed)
             prune = pr.Prune(cross_train_data, validation_data)
-            initial_tree, pruned_tree = prune.get_optimum_pruned_tree()
+            initial_tree,initial_depth, pruned_tree, pruned_depth = prune.get_optimum_pruned_tree()
+            each_unpruned_depth.append(initial_depth)
+            each_pruned_depth.append(pruned_depth)
             if evaluate.evaluate(validation_data,pruned_tree) >= accuracy:
                 accuracy = evaluate.evaluate(validation_data,pruned_tree)
                 output_tree = pruned_tree
             else:
                 pass
-        
+        all_pruned_depth.append(np.average(each_pruned_depth))
+        all_unpruned_depth.append(np.average(each_unpruned_depth))
         evaluation_vector[i] = evaluate.evaluate(test_data, output_tree)
         confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], output_tree)
     
     #For the evaluation section
     average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 10
-    print(average_confusion_matrix, average_eval)
+    print("Average confusion matrix: \n", average_confusion_matrix, "\nAverage accuracy: ", average_eval)
     evaluate.print_metrics(average_confusion_matrix)
+    print("average pre-pruning depth", np.average(all_unpruned_depth))
+    print("average post-pruning depth", np.average(all_pruned_depth))
         
     return None
 
 if __name__ == '__main__':
     seed = default_rng(444233429)
     main(seed)
-
-
-

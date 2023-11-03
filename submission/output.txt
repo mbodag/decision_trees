@@ -1,0 +1,64 @@
+Output for decision tree training algorithm without pruning - Clean data
+Average confusion matrix: 
+ [[52.4  0.   0.   0.6]
+ [ 0.  45.4  2.2  0. ]
+ [ 0.2  2.  45.8  0.3]
+ [ 0.3  0.   0.1 50.7]] 
+Average accuracy:  0.9715
+Accuracy: 0.9715
+Precision: [0.98867925 0.95378151 0.94824017 0.99217221]
+Recall: [0.9905482  0.95780591 0.95218295 0.98255814]
+Macro averaged precision: 0.9707182837174562
+Macro averaged recall: 0.9707738007624055
+F1-score: [0.98961284 0.95578947 0.95020747 0.98734177]
+Macro averaged F1-score: 0.9707378892549594
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+Output for decision tree training algorithm without pruning - Noisy data
+Average confusion matrix: 
+ [[38.3  3.3  2.8  4.5]
+ [ 2.4 40.2  4.2  2.5]
+ [ 4.5  3.6 40.5  3.4]
+ [ 3.5  2.9  3.2 40.2]] 
+Average accuracy:  0.796
+Accuracy: 0.7959999999999999
+Precision: [0.78323108 0.81541582 0.77884615 0.80722892]
+Recall: [0.78644764 0.804      0.79881657 0.7944664 ]
+Macro averaged precision: 0.7961804937135998
+Macro averaged recall: 0.7959326524532722
+F1-score: [0.78483607 0.80966767 0.78870497 0.80079681]
+Macro averaged F1-score: 0.7960013794897356
+=========================================================================
+Output for decision tree training algorithm with pruning - Clean data
+Average confusion matrix: 
+ [[49.2  0.   0.3  0. ]
+ [ 0.  48.5  1.8  0. ]
+ [ 0.8  2.3 47.2  0.2]
+ [ 0.3  0.   0.3 49.1]] 
+Average accuracy:  0.97
+Accuracy: 0.97
+Precision: [0.99393939 0.96421471 0.93465347 0.98792757]
+Recall: [0.97813121 0.95472441 0.9516129  0.9959432 ]
+Macro averaged precision: 0.9701837841019763
+Macro averaged recall: 0.9701029325666094
+F1-score: [0.98597194 0.95944609 0.94305694 0.99191919]
+Macro averaged F1-score: 0.9700985429602902
+average pre-pruning depth 11.844444444444445
+average post-pruning depth 8.533333333333335
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+Output for decision tree training algorithm with pruning - Noisy data
+Average confusion matrix: 
+ [[44.2  1.1  2.   2.2]
+ [ 2.1 43.6  3.6  2.3]
+ [ 2.2  3.9 44.3  1.6]
+ [ 2.8  0.8  1.9 41.4]] 
+Average accuracy:  0.8675
+Accuracy: 0.8675000000000002
+Precision: [0.89292929 0.84496124 0.85192308 0.88272921]
+Recall: [0.86159844 0.88259109 0.85521236 0.87157895]
+Macro averaged precision: 0.868135705312467
+Macro averaged recall: 0.8677452090609985
+F1-score: [0.87698413 0.86336634 0.85356455 0.87711864]
+Macro averaged F1-score: 0.8677584137229382
+average pre-pruning depth 17.96666666666666
+average post-pruning depth 13.977777777777778
+=========================================================================
