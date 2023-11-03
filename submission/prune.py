@@ -244,7 +244,7 @@ class Prune:
 def test_prune_optimum():
     data = np.loadtxt("wifi_db/clean_dataset.txt")
     pr = Prune(data,data)
-    it, pt = pr.get_optimum_pruned_tree()
+    it, id, pt, pd = pr.get_optimum_pruned_tree()
     print(it)
     print(pt)
 
