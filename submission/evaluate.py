@@ -117,6 +117,7 @@ def print_metrics(confusion_matrix):
     print("Macro averaged F1-score: "+str(macro_averaged_f_score(confusion_matrix)))
 
 def f_score(confusion_matrix, beta = 1):
+    """Returns f-score from a confusion matrix"""
     rcl = recall(confusion_matrix)
     pre = precision(confusion_matrix)
     numerator = (1+beta**2)* (pre*rcl)
@@ -125,8 +126,10 @@ def f_score(confusion_matrix, beta = 1):
     return f_score
 
 def macro_averaged_f_score(confusion_matrix, beta = 1):
+    """Returns macro averaged f-score from a confusion matrix"""
     return np.average(f_score(confusion_matrix, beta = beta))
 
 def evaluate(test_db, trained_tree):
+    """Creates a confusion matrix from the test data, using a given decision tree"""
     conf_matrix = confusion_matrix(test_db[:,:-1], test_db[:,-1], trained_tree)
     return accuracy(conf_matrix)
