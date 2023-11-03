@@ -93,19 +93,16 @@ def pruning_tests(data, seed):
             initial_tree,initial_depth, pruned_tree, pruned_depth = prune.get_optimum_pruned_tree()
             each_unpruned_depth.append(initial_depth)
             each_pruned_depth.append(pruned_depth)
-            if evaluate.evaluate(validation_data,pruned_tree) >= accuracy:
-                accuracy = evaluate.evaluate(validation_data,pruned_tree)
-                output_tree = pruned_tree
-            else:
-                pass
+            # Calculate average confution matrix and other performance metrics over 90 trees (nested 10 fold cross validation)
+            evaluation_vector[i] = evaluate.evaluate(test_data, pruned_tree)
+            confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], pruned_tree)
         all_pruned_depth.append(np.average(each_pruned_depth))
         all_unpruned_depth.append(np.average(each_unpruned_depth))
-        evaluation_vector[i] = evaluate.evaluate(test_data, output_tree)
-        confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], output_tree)
+        
     
     #For the evaluation section
     average_eval = np.average(evaluation_vector)
-    average_confusion_matrix = confusion_matrix / 10
+    average_confusion_matrix = confusion_matrix / 90
     print("Average confusion matrix: \n", average_confusion_matrix, "\nAverage accuracy: ", average_eval)
     evaluate.print_metrics(average_confusion_matrix)
     print("average pre-pruning depth", np.average(all_unpruned_depth))
