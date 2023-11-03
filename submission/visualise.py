@@ -84,18 +84,6 @@ def plot_tree(node, x, y, parent, branch_text, depth=0, max_depth=4):
                   'R',
                   depth + 1)
 
-# Initialize the plot
-fig = plt.figure(figsize=(12, 6))
-
-#Starting point for the root node
-plot_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
-
-#Adjusting plot limits
-plt.ylim(-4, 0)
-plt.xlim(-12, 15)
-plt.axis('off')
-
-fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 600)
 
 
 # Now plot the full tree
@@ -180,14 +168,28 @@ def plot_full_tree(node, x, y, parent, branch_text, depth=0, max_depth=16):
                   'R',
                   depth + 1)
 
-# Adjust the figure size and use subplots
-fig = plt.figure(figsize=(12, 6))
+if __name__ == '__main__':
+    # Initialize the plot
+    # Adjust the figure size and use subplots
+    fig = plt.figure(figsize=(12, 6))
 
-# Call the plot_tree function
-plot_full_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
+    #Starting point for the root node
+    plot_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
 
-plt.ylim(-15, 1)
-plt.xlim(-65000,65000)
-plt.axis('off')
+    #Adjusting plot limits
+    plt.ylim(-4, 0)
+    plt.xlim(-12, 15)
+    plt.axis('off')
 
-fig.savefig('decision_tree_full_graph.svg', format = 'svg', dpi = 600)
+    fig.savefig('decision_tree_graph.svg', format = 'svg', dpi = 600)
+
+    fig = plt.figure(figsize=(12, 6))
+
+    # Call the plot_tree function
+    plot_full_tree(decision_tree, 0, 0, (0, 0), 'Root', 1)
+
+    plt.ylim(-15, 1)
+    plt.xlim(-65000,65000)
+    plt.axis('off')
+
+    fig.savefig('decision_tree_full_graph.svg', format = 'svg', dpi = 600)

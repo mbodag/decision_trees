@@ -77,7 +77,7 @@ def confusion_matrix(x_test, y_test, decision_tree):
     """Creates a confusion matrix from the data"""
 
     y_predicted = predict(x_test, decision_tree)
-    confusion_matrix = np.zeros((4,4)) #TODO CHANGE LATER TO GENERALISE
+    confusion_matrix = np.zeros((4,4)) 
     for i in range(np.size(y_predicted)):
         try:
             confusion_matrix[int(y_test[i]) - 1,int(y_predicted[i]) - 1] = confusion_matrix[int(y_test[i])-1,int(y_predicted[i])-1] + 1
@@ -100,11 +100,11 @@ def recall(confusion_matrix):
 
 def macro_avg_precision(confusion_matrix):
     """Returns macro averaged precision from a confusion matrix"""
-    return np.average(np.diag(confusion_matrix) / np.sum(confusion_matrix, axis = 1))
+    return np.average(np.diag(confusion_matrix) / np.sum(confusion_matrix, axis = 0))
 
 def macro_avg_recall(confusion_matrix):
     """Returns macro averaged recall from a confusion matrix"""
-    return np.average(np.diag(confusion_matrix) / np.sum(confusion_matrix, axis = 0))
+    return np.average(np.diag(confusion_matrix) / np.sum(confusion_matrix, axis = 1))
 
 def print_metrics(confusion_matrix):
     """Prints important metrics from a confusion matrix"""
@@ -130,4 +130,3 @@ def macro_averaged_f_score(confusion_matrix, beta = 1):
 def evaluate(test_db, trained_tree):
     conf_matrix = confusion_matrix(test_db[:,:-1], test_db[:,-1], trained_tree)
     return accuracy(conf_matrix)
-    

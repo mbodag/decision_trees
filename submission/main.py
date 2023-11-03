@@ -44,7 +44,6 @@ def eval_cross_validation(data, seed):
     Returns:
         None
     """
-    evaluation_vector = np.zeros(10)
     confusion_matrix = np.zeros((4,4))
     for i in range(10):
         #Split the dataset
@@ -52,13 +51,11 @@ def eval_cross_validation(data, seed):
 
         #First cross-validation evaluation bit
         decision_tree, depth = decision_tree_learning(train_data, 0)
-        evaluation_vector[i] = evaluate.evaluate(test_data, decision_tree)
         confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], decision_tree)
     
     #For the evaluation section
-    average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 10
-    print("Average confusion matrix: \n", average_confusion_matrix, "\nAverage accuracy: ", average_eval)
+    print("Average confusion matrix: \n", average_confusion_matrix)
     evaluate.print_metrics(average_confusion_matrix)
     #file = open('example_tree.json','w')
     #json.dump(decision_tree, file, indent = 4)
@@ -75,7 +72,6 @@ def pruning_tests(data, seed):
     Returns:
         None
     """
-    evaluation_vector = np.zeros(10)
     confusion_matrix = np.zeros((4,4))
     all_unpruned_depth = []
     all_pruned_depth = []
@@ -94,16 +90,14 @@ def pruning_tests(data, seed):
             each_unpruned_depth.append(initial_depth)
             each_pruned_depth.append(pruned_depth)
             # Calculate average confution matrix and other performance metrics over 90 trees (nested 10 fold cross validation)
-            evaluation_vector[i] = evaluate.evaluate(test_data, pruned_tree)
             confusion_matrix += evaluate.confusion_matrix(test_data[:,:-1], test_data[:,-1], pruned_tree)
         all_pruned_depth.append(np.average(each_pruned_depth))
         all_unpruned_depth.append(np.average(each_unpruned_depth))
         
     
     #For the evaluation section
-    average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 90
-    print("Average confusion matrix: \n", average_confusion_matrix, "\nAverage accuracy: ", average_eval)
+    print("Average confusion matrix: \n", average_confusion_matrix)
     evaluate.print_metrics(average_confusion_matrix)
     print("average pre-pruning depth", np.average(all_unpruned_depth))
     print("average post-pruning depth", np.average(all_pruned_depth))
@@ -111,5 +105,6 @@ def pruning_tests(data, seed):
     return None
 
 if __name__ == '__main__':
+    #seed used in report: 444233429
     seed = default_rng(444233429)
     main(seed)
