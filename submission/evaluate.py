@@ -1,38 +1,6 @@
 import numpy as np
 import json
 
-def split_dataset_with_validation(dataset, test_ratio, validation_ratio):
-    """Create a decision tree of given depth from the input dataset
-
-    Extended description of function.
-
-    Args:
-        dataset (numpy.ndarray): The dataset to be split
-        test_ratio (float): The ratio of the dataset to be used for testing
-        validation_ratio (float, default 0.0): The ratio of the dataset to be used for validation
-
-    Returns:
-        training_data (numpy.ndarray): Training dataset
-        test_data (numpy.ndarray): Test dataset
-        validation_data (numpy.ndarray): Validation dataset (empty if validation_ratio is not specified)
-
-    """
-    if test_ratio > 1 or validation_ratio > 1 or test_ratio + validation_ratio > 1:
-        raise ValueError('Invalid ratios')
-    np.random.shuffle(dataset)
-    num_data_points = np.size(dataset, axis = 0)
-    num_test_points = round(num_data_points * test_ratio)
-    test_data = dataset[:num_test_points]
-    training_data = dataset[num_test_points:]
-    validation_data = np.array([])
-    if validation_ratio > 0:
-        num_validation_points = round(num_data_points * validation_ratio)
-        validation_data = training_data[:num_validation_points]
-        training_data = training_data[num_validation_points:]
-
-    
-    return training_data, test_data, validation_data
-
 def split_dataset(dataset, test_ratio, rng = np.random.default_rng(1)):
     """Create a decision tree of given depth from the input dataset
 
@@ -147,9 +115,6 @@ def print_metrics(confusion_matrix):
     print("Macro averaged recall: "+ str(macro_avg_recall(confusion_matrix)))
     print("F1-score: "+str(f_score(confusion_matrix)))
     print("Macro averaged F1-score: "+str(macro_averaged_f_score(confusion_matrix)))
-
-def validation_error():
-    pass
 
 def f_score(confusion_matrix, beta = 1):
     rcl = recall(confusion_matrix)
