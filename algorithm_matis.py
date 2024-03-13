@@ -33,7 +33,7 @@ def find_split(dataset):
 
 
 
-def decision_tree_learning(dataset: np.array, depth: int):
+def decision_tree_learning(dataset: np.ndarray, depth: int):
     """Create a decision tree of given depth from the input dataset
 
     Extended description of function.

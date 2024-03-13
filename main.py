@@ -29,7 +29,8 @@ def eval_cross_validation(data, seed):
     #For the evaluation section
     average_eval = np.average(evaluation_vector)
     average_confusion_matrix = confusion_matrix / 10
-    print(average_confusion_matrix, average_eval)
+    print("Average confusion matrix: ", average_confusion_matrix)
+    print("Average accuracy: ", average_eval)
     #file = open('example_tree.json','w')
     #json.dump(decision_tree, file, indent = 4)
 
